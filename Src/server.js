@@ -24,7 +24,11 @@ app.post("/chat", async (req, res) => {
       },
       body: JSON.stringify({
         model: "openai/gpt-4o-mini",
-        messages: [{ role: "user", content: userMessage }]
+        
+        messages: [{ role: "user", content: userMessage },
+        { role: "system", content: "تو اسم تو هوشیار هست و سازندت محمد خطایی هست. همیشه پاسخ‌هات دوستانه و کوتاه باشه." }
+
+        ]
       }),
     });
 
