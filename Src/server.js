@@ -15,27 +15,27 @@ const LIARA_API_KEY = process.env.API_KEY;   // توکن Liara
 app.post("/chat", async (req, res) => {
   try {
     const userMessage = req.body.message;
-    const response = await fetch(`${LIARA_BASE_URL}/chat/completions`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${LIARA_API_KEY}`
+const response = await fetch(`${LIARA_BASE_URL}/chat/completions`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${LIARA_API_KEY}`
+  },
+  body: JSON.stringify({
+    model: "openai/gpt-4o-mini",
+    messages: [
+      {
+        role: "system",
+        content: "تو اسم تو هوشیار هست و سازندت محمد خطایی هست. همیشه پاسخ‌هات دوستانه و کوتاه باشه."
       },
-      body: JSON.stringify({
-        model: "openai/gpt-4o-mini",
-        messages: [
-          {
-            role: "system",
-            content: "تو اسم تو هوشیار هست و سازندت محمد خطایی هست. همیشه پاسخ‌هات دوستانه و کوتاه باشه."
-          },
-          {
-            role: "user",
-            content: userMessage
-          }
-        ]
-      }),
-    });
-    
+      {
+        role: "user",
+        content: userMessage
+      }
+    ]
+  }),
+});
+
 
     const data = await response.json();
 
